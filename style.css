@@ -1,0 +1,134 @@
+
+:root {
+  --color1: #0F70B7;
+  --color2: #6A288B;
+  --color3: #E91125;
+  --color4: #32BCC7;
+  --color5: #2a759b;
+  --color6: #eeeeee;
+}
+
+.casii{
+    background: var(--color1);
+    background: linear-gradient(90deg, var(--color3) 0%, var(--color2) 33%, var(--color1) 66%,var(--color4) 100%);
+}
+
+
+
+body{
+     background-color: var(--color6);
+     background-size: cover;
+     background-attachment: fixed;
+}
+
+.card
+{
+     text-align:center;
+}
+
+.page-link {
+    color: var(--color2);
+    background-color: var(--color5);
+}
+
+.card a {
+    color: var(--color6);
+}
+
+.card a.lista {
+    color: var(--color5);
+}
+
+.bg-success a {
+    color: var(--color2);
+}
+
+.container
+{
+    /*margin-top:50px;*/
+}
+
+span.title
+{
+    font-weight:bold;
+}
+
+label .ui-widget{
+    font-size:2rem;
+}
+
+.form-label
+{
+    font-size:1rem;
+    font-weight: bolder;
+}
+
+.btn-primary
+{
+    background: var(--color1);
+    background: linear-gradient(90deg, var(--color3) 0%, var(--color2) 33%, var(--color1) 66%,var(--color4) 100%);
+    border-radius: 1rem;
+    border: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-pills .nav-link
+{
+    background: var(--color1);
+    background: linear-gradient(90deg,  var(--color1) 2%, var(--color2) 3%);
+    border: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color:#dddddd;
+    margin:1px;
+}
+
+.nav-link:hover {
+    color: white;
+    background: var(--color3);
+    background: linear-gradient(90deg,  var(--color4) 2%, var(--color2) 3%);
+}
+
+.nav-link.active
+{
+    background: var(--color3);
+    background: linear-gradient(90deg,  var(--color4) 2%, var(--color3) 3%);
+    border: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.form-group i {
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+p.pregunta
+{
+    font-weight: bold;
+    margin-bottom:0 !important;
+    margin-top:1em;
+}
+
+p.aclaracion
+{
+    color: #666666;
+    margin-bottom:0 !important;
+    margin-top:0;
+}
+
+.align-content-center
+{
+text-align:center;
+}
+
+.contacto a
+{
+    color:var(--color1);
+    font-weight: bold;
+    text-underline: none;
+}
