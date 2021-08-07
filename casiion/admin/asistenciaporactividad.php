@@ -4,26 +4,48 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
 
-include($_SERVER['DOCUMENT_ROOT'] . "/_medoo.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php");
+include("../_medoo.php");
+include("../php/usuario.php");
 include ("nroinscritos.php");
 require "adminsession.php";
 
+$idactividad=$_GET['idactividad'];
 
+global $database;
+$asistencia=$database->select("asistencia",[
+    "[>]usuarios" => "idusuario",
+],[
+        'usuarios.idusuario',
+        'usuarios.nombre',
+        'usuarios.apellido',
+        'usuarios.email',
+        'asistencia.ingreso',
+        'asistencia.salida',
+        'asistencia.respuestascorrectas'
+    ]
+    ,[
+        'idactividad'=>$idactividad
+    ]
+);
 
-if(isset($_GET['filtropais']))
+if(isset($_GET['download']))
 {
-    $filtro=$_GET['filtropais'];
-    $invitados=getusuariosfiltropais($filtro);
+    $fileName = "asistencia_"."_". date("Y-m-d H.i.s") . ".xlsx";
+
+
+    downloadxlsx($fileName, $asistencia);
+
+
 
 }
-else
-{
-    $filtro="";
-    $invitados=getusuarios();
-}
 
-$_SESSION['url']=$_SERVER['REQUEST_URI'];
+function downloadxlsx($fileName, $data)
+{
+    $header[0]= array_keys($data[0]);
+    $dataWithHeader=array_merge($header,$data);
+
+    SimpleXLSXGen::fromArray( $dataWithHeader )->downloadAs($fileName);
+}
 
 ?>
 <?php
@@ -31,15 +53,12 @@ include "_head.php";
 ?>
     <body>
 
-<?php
-
-echo filtropais($filtro);
-?>
-
     <div class="container-fluid" style="background-color: #dddddd;">
         <?php
-        echo build_table($invitados);
-        echo '<a class="btn btn-primary" href="downloadxlsx.php?pais='.$filtro.'">Descargar en Excel</a>';
+        echo build_table($asistencia);
+        echo '<a class="btn btn-primary" href="asistenciaporactividad.php?download=xlsx&idactividad='.$idactividad.'">Descargar en Excel</a>';
+        echo '<a class="btn btn-primary" href="resultadossatisfaccion.php?idactividad='.$idactividad.'">Resultados Satisfacción</a>';
+        echo '<a class="btn btn-primary" href="sorteoporactividad.php?idactividad='.$idactividad.'">Sorteo</a>';
         ?>
     </div>
 <?php
@@ -54,27 +73,22 @@ function filtropais($filtro)
 {
     echo '
     <nav class="nav nav-pills nav-justified">
-        <a class="nav-link" href="listadoinscritos.php">Todos<span class="badge bg-secondary">'.count(getusuarios()).'</span><span class="badge bg-success">'.count(getusuariosvalidos()).'</span></a>';
+        <a class="nav-link" href="listadoinscritos.php">Todos<span class="badge bg-secondary">'.count(getusuarios()).'</span></a>';
     $filtrospaises = ["Clein","Argentina","Bolivia","Perú"];
     $nroinscritos=nroinscritos($filtrospaises);
-    $nroinscritosvalidos=nroinscritosvalidos($filtrospaises);
-        foreach($filtrospaises as $paises)
-        {
-            $active = "";
-            if($filtro==$paises)
+    foreach($filtrospaises as $paises)
+    {
+        $active = "";
+        if($filtro==$paises)
         {
             $active = "active";
         }
 
-            echo '<a class="nav-link '.$active.'" href="listadoinscritos.php?filtropais='.$paises.'">'.$paises.'<span class="badge bg-secondary">'.$nroinscritos[$paises].'</span><span class="badge bg-success">'.$nroinscritosvalidos[$paises].'</span></a>';
-        }
+        echo '<a class="nav-link '.$active.'" href="listadoinscritos.php?filtropais='.$paises.'">'.$paises.'<span class="badge bg-secondary">'.$nroinscritos[$paises].'</span></a>';
+    }
 
     echo '
-        <a class="nav-link" href="actividades.php">Actividades</a>
-        <a class="nav-link" href="listadoasistencia.php">Asistencia</a>
-        <a class="nav-link" href="listadocertificados.php">Certificados</a>
         <a class="nav-link" href="logout.php">Logout</a>
-        
         </nav>';
 }
 
@@ -85,7 +99,6 @@ function build_table($array)
     $html = '<table class="table table-striped">';
     // header row
     $html .= '<tr>';
-    $html .= '<th>Cupo</th>';
     if(isset($array[0]))
     {
         foreach ($array[0] as $key => $value) {
@@ -108,15 +121,6 @@ function build_table($array)
 
     foreach ($array as $key => $value) {
         $html .= '<tr>';
-        if($value['estadopago']=='Valido' || $value['estadopago']=='Pendiente')
-        {
-            $html .= '<td>' . $i . '</td>';
-            $i++;
-        }
-        else
-        {
-            $html .= '<td>' . '</td>';
-        }
         foreach ($value as $key2 => $value2) {
             if($key2 == "idusuario")
             {
@@ -140,11 +144,3 @@ function build_table($array)
     $html .= '</table>';
     return $html;
 }
-
-
-require_once($_SERVER['DOCUMENT_ROOT'] . "/php/vencidos.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/php/listadeespera.php");
-?>
-
-
-

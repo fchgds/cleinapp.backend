@@ -55,7 +55,7 @@ function filtropais($filtro)
     echo '
     <nav class="nav nav-pills nav-justified">
         <a class="nav-link" href="listadoinscritos.php">Todos<span class="badge bg-secondary">'.count(getusuarios()).'</span><span class="badge bg-success">'.count(getusuariosvalidos()).'</span></a>';
-    $filtrospaises = ["Clein","Argentina","Bolivia","Perú"];
+    $filtrospaises = ["Clein"];
     $nroinscritos=nroinscritos($filtrospaises);
     $nroinscritosvalidos=nroinscritosvalidos($filtrospaises);
         foreach($filtrospaises as $paises)

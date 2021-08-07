@@ -2,33 +2,63 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/usuario.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/_medoo.php');
-require_once "adminsession.php";
+require ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
 
-echo build_table(listaganadores());
+include("../_medoo.php");
+include("../php/usuario.php");
+include ("nroinscritos.php");
+require "adminsession.php";
+
+$idactividad=$_GET['idactividad'];
+
+global $database;
+$asistencia=$database->select("asistencia",
+    '*'
+    ,[
+        'idactividad'=>$idactividad
+    ]
+);
+
+?>
+<?php
+include "_head.php";
+?>
+    <body>
+
+    <div class="container-fluid" style="background-color: #dddddd;">
+        <?php
+        echo build_table($asistencia);
+        ?>
+    </div>
+<?php
+include "_footer.php";
+?>
 
 
-function listaganadores()
+
+<?php
+
+function filtropais($filtro)
 {
-    global $database;
-    $data=$database->select("ganadores",
-        [
-            "[>]usuarios" => "idusuario"
-        ],[
-            'ganadores.idganador',
-            'usuarios.idusuario',
-            'usuarios.nombre',
-            'usuarios.apellido',
-            'usuarios.email',
-            'usuarios.pais',
-            'ganadores.premio',
-        ],[
-            "ORDER" => ["created"=>'DESC']
-        ]
-    );
-    return $data;
+    echo '
+    <nav class="nav nav-pills nav-justified">
+        <a class="nav-link" href="listadoinscritos.php">Todos<span class="badge bg-secondary">'.count(getusuarios()).'</span></a>';
+    $filtrospaises = ["Clein","Argentina","Bolivia","Perú"];
+    $nroinscritos=nroinscritos($filtrospaises);
+    foreach($filtrospaises as $paises)
+    {
+        $active = "";
+        if($filtro==$paises)
+        {
+            $active = "active";
+        }
+
+        echo '<a class="nav-link '.$active.'" href="listadoinscritos.php?filtropais='.$paises.'">'.$paises.'<span class="badge bg-secondary">'.$nroinscritos[$paises].'</span></a>';
+    }
+
+    echo '
+        <a class="nav-link" href="logout.php">Logout</a>
+        </nav>';
 }
 
 
@@ -40,11 +70,9 @@ function build_table($array)
     $html .= '<tr>';
     if(isset($array[0]))
     {
-        $html .= '<th>#</th>';
         foreach ($array[0] as $key => $value) {
             $html .= '<th>' . htmlspecialchars($key) . '</th>';
         }
-        $html .= '<th>Eliminar</th>';
     }
     else
     {
@@ -62,12 +90,7 @@ function build_table($array)
 
     foreach ($array as $key => $value) {
         $html .= '<tr>';
-        $html .= "<td>$i</td>";
         foreach ($value as $key2 => $value2) {
-            if($key2 == "idganador")
-            {
-                $idganador=$value2;
-            }
             if($key2 == "idusuario")
             {
                 $html .= '<td><a class="btn btn-primary" href="editar.php?idusuario=' . htmlspecialchars($value2) . '">'. htmlspecialchars($value2).'</a></td>';
@@ -82,8 +105,6 @@ function build_table($array)
                 $html .= '<td>' . htmlspecialchars($value2) . '</td>';
             }
         }
-        $html .= "<td><a class ='btn btn-danger' href='guardarganador.php?eliminar=$idganador'>Eliminar</td>";
-        $i++;
         $html .= '</tr>';
     }
 

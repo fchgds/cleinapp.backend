@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require '../vendor/autoload.php';
 require_once "_medoo.php";
 require_once "php/session.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php";
+//require_once $_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php";
 
 if(isset($_SESSION['idusuario']))
 {
@@ -97,8 +97,6 @@ include "_head.php";
 include "_footer.php";
 ?></body>
 
-<script src="vendor/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <script src="js/guardarformulario.js"></script>
 <script>
     function next()

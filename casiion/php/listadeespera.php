@@ -1,5 +1,4 @@
 <?php
-require_once 'usuario.php';
 
 $paises = ["Clein","Argentina","Bolivia","Perú"];
 $cupos = [74,74,74,74];

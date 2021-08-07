@@ -1,6 +1,6 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '/php/enviarcorreo.php';
+require "enviarcorreo.php";
 
 function enviarcorreohabilitado($email,$nombre)
 {

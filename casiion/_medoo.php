@@ -3,7 +3,7 @@
 use Medoo\Medoo;
 $database = new Medoo([
     'database_type' => 'mysql',
-    'database_name' => 'aleiiafc_appclein',
+    'database_name' => 'aleiiafc_appcasiion',
     'server' => 'localhost',
     'username' => 'aleiiafc_appclein',
     'password' => 't[1M8lnas7Et',

@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require '../vendor/autoload.php';
 require_once "_medoo.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/php/session.php";
+//require_once $_SERVER['DOCUMENT_ROOT'] . "/php/session.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/php/asistencia.php";
 

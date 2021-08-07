@@ -2,11 +2,13 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once '../vendor/autoload.php';
-include($_SERVER['DOCUMENT_ROOT'] . "/_medoo.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/certificados.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/generacodigo.php");
+require ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
+
+include("../_medoo.php");
+include("../php/usuario.php");
+include("../php/certificados.php");
+include("../php/generacodigo.php");
+include("../php/notificacionemail.php");
 
 if(isset($_GET['idusuario']))
 {
@@ -28,8 +30,8 @@ function generarcertificado($idusuario)
     $nombrecompleto = $listadoasistencia['nombre'] .' '.$listadoasistencia['apellido'];
     $idusuario=$listadoasistencia['idusuario'];
     $email=$listadoasistencia['email'];
-    $path2="/home/aleiiafc/app.clein.org/certificados/casiion/";
-    $path="../certificados/casiion/";
+    $path2="/home/aleiiafc/app.clein.org/casiion/certificados/casiionorganizadores/";
+    $path="../certificados/casiionorganizadores/";
     $archivo="CASII-On_".str_replace(' ', '', $nombrecompleto).".pdf";
     $codigo=generacodigo();
     $url="https://app.clein.org/certificado.php?c=".$codigo;

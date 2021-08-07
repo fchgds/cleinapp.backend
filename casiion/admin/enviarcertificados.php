@@ -2,12 +2,13 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once '../vendor/autoload.php';
-include($_SERVER['DOCUMENT_ROOT'] . "/_medoo.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/certificados.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/generacodigo.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/php/notificacionemail.php");
+require ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
+
+include("../_medoo.php");
+include("../php/usuario.php");
+include("../php/certificados.php");
+include("../php/generacodigo.php");
+include("../php/notificacionemail.php");
 
 if(isset($_GET['idcertificado']))
 {

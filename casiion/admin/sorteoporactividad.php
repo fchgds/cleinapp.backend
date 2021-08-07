@@ -4,29 +4,26 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
 
-include($_SERVER['DOCUMENT_ROOT'] . "/_medoo.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php");
+include("../_medoo.php");
+include("../php/usuario.php");
+
 include ("nroinscritos.php");
 require "adminsession.php";
 
 $idactividad=$_GET['idactividad'];
 
 global $database;
-$asistencia=$database->select("asistencia",[
-    "[>]usuarios" => "idusuario",
-],[
-        'usuarios.idusuario',
-        'usuarios.nombre',
-        'usuarios.apellido',
-        'usuarios.email',
-        'asistencia.ingreso',
-        'asistencia.salida',
-        'asistencia.respuestascorrectas'
-    ]
-    ,[
-        'idactividad'=>$idactividad
-    ]
-);
+
+$query = "SELECT `usuarios`.`idusuario`,`usuarios`.`nombre`,`usuarios`.`apellido`,`usuarios`.`email`,`usuarios`.`pais`,`asistencia`.`ingreso`,`asistencia`.`salida`,`asistencia`.`respuestascorrectas` FROM `asistencia` LEFT JOIN `usuarios` USING (`idusuario`) 
+WHERE ((`respuestascorrectas` LIKE '%4%' OR `respuestascorrectas` LIKE '%3%') AND `idactividad` = '1' AND idusuario NOT IN (SELECT idusuario FROM ganadores))";
+
+$asistencia=$database->query($query)->fetchAll();
+echo "<br><br>";
+
+
+
+
+
 
 if(isset($_GET['download']))
 {
@@ -54,13 +51,66 @@ include "_head.php";
     <body>
 
     <div class="container-fluid" style="background-color: #dddddd;">
+        <div class="row" id="lista">
         <?php
-        echo build_table($asistencia);
-        echo '<a class="btn btn-primary" href="asistenciaporactividad.php?download=xlsx&idactividad='.$idactividad.'">Descargar en Excel</a>';
-        echo '<a class="btn btn-primary" href="resultadossatisfaccion.php?idactividad='.$idactividad.'">Resultados Satisfacción</a>';
-        echo '<a class="btn btn-primary" href="sorteoporactividad.php?idactividad='.$idactividad.'">Sorteo</a>';
+        listado($asistencia,$idactividad);
+        ?>
+        </div>
+
+        <?php
+
+//        echo build_table($asistencia);
+
+        echo '<a class="btn btn-primary" href="#" onclick="sorteo()">Realizar Sorteo<span class="badge bg-success">'.count($asistencia).'</span></a>';
+
         ?>
     </div>
+    <script src="../vendor/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script>
+    <?php
+    echo "array=[";
+    foreach ($asistencia as $asistente) {
+        echo $asistente['idusuario'] . ',';
+    }
+    echo "]";
+    ?>
+
+    function sorteo()
+    {
+        if(array.length>1)
+        {
+            ejecutarsorteo();
+        }
+        else
+        {
+            location.reload();
+        }
+
+    }
+    function ejecutarsorteo()
+    {
+
+        var i = array.length-1
+        animatesorteo(i);
+
+    }
+
+    function animatesorteo(i)
+    {
+        if(i>=1)
+        {
+            item=Math.floor(Math.random()*array.length);
+            id=array[item];
+            array.splice(item, 1);
+            $( "#"+id).fadeOut();
+            console.log(array);
+            i--;
+            setTimeout(function() { animatesorteo(i); }, 100);
+        }
+    }
+</script>
+
 <?php
 include "_footer.php";
 ?>
@@ -68,6 +118,25 @@ include "_footer.php";
 
 
 <?php
+
+
+function listado($asistencia,$idactividad)
+{
+    foreach ($asistencia as $asistente)
+    {
+        $nombre = $asistente['nombre']. ' '. $asistente['apellido'];
+        $pais=$asistente['pais'];
+        echo '<div class="card" id="'.$asistente['idusuario'].'" style="width: 18rem;">
+                <a class="lista" href="guardarganador.php?idusuario='.$asistente['idusuario'].'&idactividad='.$idactividad.'" >
+                <div class="card-body">
+                    <h5 class="card-title">'.$nombre.'</h5>
+                    <p>'.$pais.'</p>
+                </div>
+                </a>
+            </div>';
+    }
+}
+
 
 function filtropais($filtro)
 {
@@ -91,6 +160,10 @@ function filtropais($filtro)
         <a class="nav-link" href="logout.php">Logout</a>
         </nav>';
 }
+
+
+
+
 
 
 function build_table($array)

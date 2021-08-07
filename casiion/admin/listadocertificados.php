@@ -4,9 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
 
-include($_SERVER['DOCUMENT_ROOT'] . "/_medoo.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/certificados.php");
+include("../_medoo.php");
+include("../php/usuario.php");
+include("../php/certificados.php");
 include ("nroinscritos.php");
 //require "adminsession.php";
 
@@ -35,9 +35,10 @@ include "_head.php";
 
     echo filtropais($filtro);
     ?>
+
     <div class="container-fluid" style="background-color: #dddddd;">
         <?php
-        $listadoasistencias=getcertificadosasistencia();
+        $listadoasistencias=showcertificadosasistencia();
         echo build_table($listadoasistencias);
         ?>
     </div>
@@ -49,7 +50,6 @@ include "_footer.php";
 
 <?php
 
-
 function filtropais($filtro)
 {
     echo '
@@ -58,16 +58,16 @@ function filtropais($filtro)
     $filtrospaises = ["Clein","Argentina","Bolivia","Perú"];
     $nroinscritos=nroinscritos($filtrospaises);
     $nroinscritosvalidos=nroinscritosvalidos($filtrospaises);
-    foreach($filtrospaises as $paises)
-    {
-        $active = "";
-        if($filtro==$paises)
+        foreach($filtrospaises as $paises)
+        {
+            $active = "";
+            if($filtro==$paises)
         {
             $active = "active";
         }
 
-        echo '<a class="nav-link '.$active.'" href="listadoinscritos.php?filtropais='.$paises.'">'.$paises.'<span class="badge bg-secondary">'.$nroinscritos[$paises].'</span><span class="badge bg-success">'.$nroinscritosvalidos[$paises].'</span></a>';
-    }
+            echo '<a class="nav-link '.$active.'" href="listadoinscritos.php?filtropais='.$paises.'">'.$paises.'<span class="badge bg-secondary">'.$nroinscritos[$paises].'</span><span class="badge bg-success">'.$nroinscritosvalidos[$paises].'</span></a>';
+        }
 
     echo '
         <a class="nav-link" href="listadoasistencia.php">Asistencias</a>
@@ -77,7 +77,6 @@ function filtropais($filtro)
         
         </nav>';
 }
-
 
 
 function build_table($array)
@@ -92,7 +91,6 @@ function build_table($array)
         foreach ($array[0] as $key => $value) {
             $html .= '<th>' . htmlspecialchars($key) . '</th>';
         }
-        $html .= '<th>Acciones</th>';
     }
     else
     {
@@ -113,21 +111,27 @@ function build_table($array)
         $html .= '<td>' . $i . '</td>';
             $i++;
         foreach ($value as $key2 => $value2) {
-            if($key2 == "idusuario")
+            if($key2 == "idcertificado")
             {
-                $html .= '<td><a class="btn btn-primary" href="editar.php?idusuario=' . htmlspecialchars($value2) . '">'. htmlspecialchars($value2).'</a></td>';
-//                $html .= '<td>' . htmlspecialchars($value2) . '</td>';
-                $idusuario=$value2;
+//                $html .= '<td><a class="btn btn-primary" href="editar.php?idusuario=' . htmlspecialchars($value2) . '">'. htmlspecialchars($value2).'</a></td>';
+                $html .= '<td>' . htmlspecialchars($value2) . '</td>';
+                $idcertificado=$value2;
             }else if($key2 == "codigo")
             {
                 $html .= '<td><a href="../certificado.php?c=' . $value2 . '">'. $value2.'</a></td>';
+            }
+            else if($key2 == "idusuario")
+            {
+                $idusuario=$value2;
             }
             else
             {
                 $html .= '<td>' . htmlspecialchars($value2) . '</td>';
             }
         }
-        $html .= '<td><a class="btn btn-primary" href="generarcertificados.php?idusuario=' . $idusuario . '">Generar Certificado</a></td>';
+        $html .= '<td><a class="btn btn-primary" href="generarcertificados.php?idusuario=' . $idusuario . '">Generar</a></td>';
+        $html .= '<td><a class="btn btn-primary" href="enviarcertificados.php?idcertificado=' . $idcertificado . '">Enviar</a></td>';
+        $html .= '<td><a class="btn btn-primary" href="generarcertificados.php?eliminar=true&idcertificado=' . $idcertificado . '">Eliminar</a></td>';
         $html .= '</tr>';
     }
 

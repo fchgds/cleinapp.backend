@@ -82,7 +82,7 @@ function generarcertificadoarchivo($nombre,$codigo,$archivo)
         ],
         'default_font' => 'pristina'
     ]);
-    $pagecount = $mpdf->SetSourceFile('CertificadoCASII-On.pdf');
+    $pagecount = $mpdf->SetSourceFile('CertificadoComoOrganizadorCASII-ON.pdf');
     $tplId = $mpdf->ImportPage($pagecount);
     $mpdf->UseTemplate($tplId);
     $mpdf->SetTitle("Certificado CASII-On");

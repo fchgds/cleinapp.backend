@@ -18,24 +18,11 @@ else
 }
 
 
+
+
+include('_head.php');
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Registro CLEIN 2021</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160227993-1"></script>
-<!--    <script async src="js/gtag.js"></script>-->
-
-</head>
 <body>
 <div class="container" style="background-color: #dddddd;">
     <nav class="nav nav-pills nav-justified">
@@ -89,9 +76,8 @@ else
                       <?php
                       $options = ["Argentina",
                           "Bolivia",
-                          "Chile",
-                          "Perú",
                           "Brasil",
+                          "Chile",
                           "Colombia",
                           "Costa Rica",
                           "Cuba",
@@ -103,6 +89,7 @@ else
                           "Nicaragua",
                           "Panamá",
                           "Paraguay",
+                          "Perú",
                           "Puerto Rico",
                           "República Dominicana",
                           "Uruguay",
@@ -121,11 +108,10 @@ else
                       <label for="enteraste">¿Cómo te enteraste del CLEIN 2021? </label>
                       <select class="form-control form-select form-select-lg mb-3" id="enteraste" name="enteraste" aria-label="enteraste" required>
                           <?php
-                          $options = ["Facebook/Instagram APEII",
-                                      "Facebook/Instagram AArEII",
-                                      "Facebook/Instagram OBEII",
+                          $options = ["Facebook/Instagram ALEIIAF",
                                       "Facebook/Instagram CLEIN",
                                       "Delegado ALEIIAF de mi país",
+                                      "Mi Universidad",
                                       "Otro"];
                           selectoptions($options,$usuario['enteraste']);
                           ?>
@@ -184,8 +170,6 @@ else
       include "_footer.php";
       ?></body>
 
-<script src="vendor/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <script src="js/guardarformulario.js"></script>
 <script>
     $(document).ready(function() {

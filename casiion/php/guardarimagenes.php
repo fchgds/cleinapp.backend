@@ -1,7 +1,5 @@
 <?php
 
-include_once "usuario.php";
-
 try{
     if(isset($_POST['idusuario']))
     {

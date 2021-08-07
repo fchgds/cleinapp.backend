@@ -23,19 +23,19 @@ function enviarcorreo($to,$nombre,$subject,$body)
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host = 'mail.clein.org';                    // Set the SMTP server to send through
         $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-        $mail->Username = 'casiion@clein.org';                     // SMTP username
+        $mail->Username = 'app@clein.org';                     // SMTP username
         $mail->Password = 'lLKs9~cU@0.@';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
         $mail->Port = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
         //Recipients
-        $mail->setFrom('casiion@clein.org', 'CASII-ON');
+        $mail->setFrom('app@clein.org', 'CASII-ON');
         $mail->addAddress($to, $nombre);     // Add a recipient
 //    $mail->addAddress('ellen@example.com');               // Name is optional
         $mail->addReplyTo('contacto@clein.org', 'Contacto CLEIN');
 //    $mail->addCC('cc@example.com');
-        $mail->addBCC('casiion@clein.org');
+        $mail->addBCC('app@clein.org');
 
         // Attachments
 //    $mail->addAttachment($_SERVER['DOCUMENT_ROOT'] . "/bootcamp/certificado/ene2021/$id.pdf");         // Add attachments
@@ -65,22 +65,22 @@ function enviarcorreoadjunto($to,$nombre,$subject,$body,$archivo)
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host = 'mail.clein.org';                    // Set the SMTP server to send through
         $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-        $mail->Username = 'casiion@clein.org';                     // SMTP username
+        $mail->Username = 'app@clein.org';                     // SMTP username
         $mail->Password = 'lLKs9~cU@0.@';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
         $mail->Port = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
         //Recipients
-        $mail->setFrom('casiion@clein.org', 'CASII-ON');
+        $mail->setFrom('app@clein.org', 'CASII-ON');
         $mail->addAddress($to, $nombre);     // Add a recipient
 //    $mail->addAddress('ellen@example.com');               // Name is optional
         $mail->addReplyTo('contacto@clein.org', 'Contacto CLEIN');
 //    $mail->addCC('cc@example.com');
-        $mail->addBCC('casiion@clein.org');
+        $mail->addBCC('app@clein.org');
 
         // Attachments
-        $mail->addAttachment($archivo,str_replace("/home/aleiiafc/app.clein.org/certificados/casiion/","",$archivo));         // Add attachments
+        $mail->addAttachment($archivo,basename($archivo));         // Add attachments
 //    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
         // Content

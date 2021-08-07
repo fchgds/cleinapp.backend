@@ -4,18 +4,17 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
 
-include($_SERVER['DOCUMENT_ROOT'] . "/_medoo.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php");
+include("../_medoo.php");
+include("../php/usuario.php");
 include ("nroinscritos.php");
 require "adminsession.php";
 
-$idactividad=$_GET['idactividad'];
 
 global $database;
-$asistencia=$database->select("asistencia",
+$actividades=$database->select("actividad",
     '*'
     ,[
-        'idactividad'=>$idactividad
+        'idactividad[>]'=>0
     ]
 );
 
@@ -27,7 +26,7 @@ include "_head.php";
 
     <div class="container-fluid" style="background-color: #dddddd;">
         <?php
-        echo build_table($asistencia);
+        echo build_table($actividades);
         ?>
     </div>
 <?php
@@ -57,6 +56,7 @@ function filtropais($filtro)
     }
 
     echo '
+        <a class="nav-link" href="listadocertificados.php">Certificados</a>
         <a class="nav-link" href="logout.php">Logout</a>
         </nav>';
 }
@@ -91,9 +91,9 @@ function build_table($array)
     foreach ($array as $key => $value) {
         $html .= '<tr>';
         foreach ($value as $key2 => $value2) {
-            if($key2 == "idusuario")
+            if($key2 == "idactividad")
             {
-                $html .= '<td><a class="btn btn-primary" href="editar.php?idusuario=' . htmlspecialchars($value2) . '">'. htmlspecialchars($value2).'</a></td>';
+                $html .= '<td><a class="btn btn-primary" href="asistenciaporactividad.php?idactividad=' . htmlspecialchars($value2) . '">'. htmlspecialchars($value2).'</a></td>';
 //                $html .= '<td>' . htmlspecialchars($value2) . '</td>';
                 $idusuario=$value2;
             }else if($key2 == "pago")

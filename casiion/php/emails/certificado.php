@@ -1,5 +1,5 @@
 <div>
-    <img src="http://app.clein.org/img/logo.png" width="300px">
+    <img src="https://app.clein.org/casiion/img/logo.png" width="300px">
     <p>
         Estimado/a <?php echo $nombre;?>
     </p>
