@@ -3,8 +3,8 @@
   --color1: #4C4185;
   --color2: #83276B;
   --color3: #D02D2F;
-  --color4: #32BCC7;
-  --color5: #2a759b;
+  --color4: #4C4185;
+  --color5: #83276B;
   --color6: #eeeeee;
 }
 
@@ -13,18 +13,28 @@
     background: linear-gradient(90deg, var(--color3) 0%, var(--color2) 50%, var(--color1) 100%);
 }
 
+@font-face {
+    font-family: "GothamBold";
+    src: url("img/GothamBold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "GothamBook";
+    src: url("img/GothamBook.ttf") format("truetype");
+}
+
 
 
 body{
     background-color: white;
     background-size: cover;
     background-attachment: fixed;
-    font-family: "GOTHAM BOOK";
+    font-family: "GothamBook",sans-serif;
 }
 
 h1, h2, h3
 {
-    font-family: "GOTHAM BOLD";
+    font-family: "GothamBold", sans-serif;
 }
 
 .card
@@ -106,6 +116,11 @@ label .ui-widget{
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.nav-link img
+{
+    height:50px;
 }
 
 .form-group i {

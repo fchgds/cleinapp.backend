@@ -4,8 +4,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
 
-include($_SERVER['DOCUMENT_ROOT'] . "/_medoo.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/clein2021/_medoo.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/clein2021/php/usuario.php");
 include ("nroinscritos.php");
 require "adminsession.php";
 

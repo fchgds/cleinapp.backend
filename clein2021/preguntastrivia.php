@@ -76,7 +76,7 @@ if(isset($_POST['idusuario']))
 <body>
 <div class="container" style="background-color: #dddddd;">
     <nav class="nav nav-pills nav-justified">
-        <a class="nav-link" aria-current="page" href="index.php"><img src="img/favicon-32x32.png" ></a>
+        <a class="nav-link" aria-current="page" href="index.php"><img src="img/CHILE2021.png" ></a>
         <a class="nav-link" aria-current="page" href="formularioregistro.php">Registro</a>
         <a class="nav-link" href="formulariocomprobante.php">Pago</a>
         <a class="nav-link" href="evento.php">Evento</a>

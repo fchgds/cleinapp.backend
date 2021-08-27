@@ -3,11 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '../vendor/autoload.php';
-include($_SERVER['DOCUMENT_ROOT'] . "/_medoo.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/certificados.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/php/generacodigo.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/php/notificacionemail.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/clein2021/_medoo.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/clein2021/php/usuario.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/clein2021/php/certificados.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/clein2021/php/generacodigo.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/clein2021/php/notificacionemail.php");
 
 if(isset($_GET['idcertificado']))
 {

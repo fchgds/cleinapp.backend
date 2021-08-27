@@ -3,8 +3,8 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/_medoo.php";
-    require $_SERVER['DOCUMENT_ROOT'] . "/php/session.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/clein2021/_medoo.php";
+    require $_SERVER['DOCUMENT_ROOT'] . "/clein2021/php/session.php";
 
 
     if(isset($_POST['password'])&&isset($_POST['user']))
@@ -55,7 +55,7 @@
     <div class="container" style="background-color: #dddddd;">
         <div class="row justify-content-center">
             <div class="col-md-4 col-sm-8">
-                <img class="" src="../img/logo.png" style="width: 100%;" />
+                <img class="" src="../img/LogoCLEIN2021.png" style="width: 100%;" />
             </div>
         </div>
         <div class="row">

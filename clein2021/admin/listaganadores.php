@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once ($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/usuario.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/_medoo.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/clein2021/php/usuario.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/clein2021/_medoo.php');
 require_once "adminsession.php";
 
 echo build_table(listaganadores());
