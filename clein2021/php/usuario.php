@@ -81,7 +81,7 @@ function getusuariosfiltropais($filtro)
         $data=$database->select("usuarios",
             '*'
             ,[
-                'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]]
+//                'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]]
             ]
         );
     }
@@ -108,7 +108,7 @@ function getusuariosestadopais($estado,$pais)
                 "AND" =>
                 [
                     'estadopago' => $estado,
-                    'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]]
+//                    'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]]
                 ]
             ]
         );
@@ -136,7 +136,7 @@ function getnrousuariosregistradospais($pais)
             '*'
             ,[
                 "AND" => [
-                    'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]],
+//                    'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]],
                     'estadopago[~]'=>["Pendiente","Valido"]
                 ]
             ]
@@ -190,7 +190,7 @@ function updateestadousuario($idusuario,$estado)
         ]
     );
 
-    echo notificarcambioestado($estadoanterior,$estado,getusuario($idusuario));
+//    echo notificarcambioestado($estadoanterior,$estado,getusuario($idusuario));
 }
 
 function guardarpago($idusuario,$locationComprobante)

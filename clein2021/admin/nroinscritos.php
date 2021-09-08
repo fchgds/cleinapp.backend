@@ -32,7 +32,7 @@ function getnroinscritospais($filtro)
             ,[
                 "AND"
                 =>[
-                    'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]],
+//                    'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]],
                     'estadopago[~]'=>["Pendiente","Valido"]
                 ]
             ]
@@ -66,7 +66,7 @@ function getnroinscritosvalidospais($filtro)
             ,[
                 "AND"
                 =>[
-                    'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]],
+//                    'pais[!~]'=>["AND" =>["Argentina","Bolivia","Perú"]],
                     'estadopago[~]'=>["Valido"]
                 ]
             ]

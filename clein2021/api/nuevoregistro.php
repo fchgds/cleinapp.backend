@@ -4,9 +4,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
-include $_SERVER['DOCUMENT_ROOT'] . "/_medoo.php";
-include $_SERVER['DOCUMENT_ROOT'] . "/php/usuario.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/php/session.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/clein2021/_medoo.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/clein2021/php/usuario.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/clein2021/php/session.php";
 
 global $database;
 
@@ -31,6 +31,9 @@ $data=$database->insert("usuarios",
         "pais" => $_POST['pais'],
         "universidad" => $_POST['universidad'],
         "email" => $_POST['email'],
+        "modalidad" => $_POST['modalidad'],
+        "profesional" => $_POST['profesional'],
+        "rol" => $_POST['rol'],
         "telefono" => $_POST['telefono'],
         "enteraste" => $_POST['enteraste']." ".$_POST['enterasteotro'],
         "fecharegistro" => date('Y-m-d H:i:s'),

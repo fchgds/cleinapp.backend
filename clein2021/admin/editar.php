@@ -22,6 +22,9 @@ if(isset($_POST['nombre']))
             "pais" => $_POST['pais'],
             "universidad" => $_POST['universidad'],
             "email" => $_POST['email'],
+            "modalidad" => $_POST['modalidad'],
+            "profesional" => $_POST['profesional'],
+            "rol" => $_POST['rol'],
             "telefono" => $_POST['telefono'],
             "estadopago" => $_POST['estadopago']
         ],[
@@ -65,7 +68,7 @@ include "_head.php";
     <div class="row">
         <div class="col" >
             <h2><a href="<?php echo $_SESSION['url'];?>" > Volver </a></h2>
-            <h2>Registro CASII-On</h2>
+            <h2>Registro</h2>
             <form id="formulario" method="post" enctype="multipart/form-data">
                 <input class="form-control" type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario['idusuario'];?>" required>
                 <div class="form-group">
@@ -136,6 +139,40 @@ include "_head.php";
                     <input class="form-control" type="text" id="universidad" name="universidad" value="<?php echo $usuario['universidad'];?>">
                 </div>
 
+                <div class="form-group">
+                    <label for="modalidad">Modalidad </label>
+                    <select class="form-control form-select form-select-lg mb-3" id="modalidad" name="modalidad" aria-label="modalidad" required>
+                        <?php
+                        $options = ["Presencial",
+                            "Online"];
+                        selectoptions($options,$usuario['modalidad']);
+                        ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="profesional">¿Estudiante o Profesional? </label>
+                    <select class="form-control form-select form-select-lg mb-3" id="profesional" name="profesional" aria-label="profesional" required>
+                        <?php
+                        $options = ["Estudiante",
+                            "Profesional"];
+                        selectoptions($options,$usuario['profesional']);
+                        ?>
+                    </select>
+
+                    <div class="form-group">
+                        <label for="rol">En calidad de </label>
+                        <select class="form-control form-select form-select-lg mb-3" id="rol" name="rol" aria-label="rol" required>
+                            <?php
+                            $options = ["Participante",
+                                "Expositor",
+                                "Comité Organizador",
+                                "ALEIIAF"];
+                            selectoptions($options,$usuario['rol']);
+                            ?>
+                        </select>
+                    </div>
+
 
                 <div>
                     <?php
@@ -164,10 +201,9 @@ include "_head.php";
                     <select class="form-control form-select form-select-lg mb-3" id="pais" name="estadopago" aria-label="estadopago" required>
                         <?php
                         $options = ["Pendiente",
+                            "Espera del Pago",
                             "Valido",
                             "Rechazado",
-                            "Vencido",
-                            "Lista Espera"
                             ];
                         selectoptions($options, $usuario['estadopago']);?>
                     </select>
@@ -179,17 +215,17 @@ include "_head.php";
 
                     <?php
                     if(!getcertificadousuario($idusuario))
-                        {
-                            echo '<a class="btn btn-primary" href="generarcertificados.php?idusuario=' . $idusuario . '">Generar Certificado</a>';
-                        }
-                    else
-                        {
-                           $certificado = getcertificadousuario($idusuario);
-                           $idcertificado = $certificado['idcertificado'];
-                            echo '<a class="btn btn-primary" target="blank" href="' . $certificado['url'] . '">Ver Certificado</a>';
-                            echo '<a class="btn btn-primary" href="generarcertificados.php?eliminar=true&idcertificado=' . $idcertificado . '">Eliminar Certificado</a>';
-                           echo '<a class="btn btn-primary" href="enviarcertificados.php?idcertificado=' . $idcertificado . '">Enviar Certificado</a>';
-                        }
+//                        {
+//                            echo '<a class="btn btn-primary" href="generarcertificados.php?idusuario=' . $idusuario . '">Generar Certificado</a>';
+//                        }
+//                    else
+//                        {
+//                           $certificado = getcertificadousuario($idusuario);
+//                           $idcertificado = $certificado['idcertificado'];
+//                            echo '<a class="btn btn-primary" target="blank" href="' . $certificado['url'] . '">Ver Certificado</a>';
+//                            echo '<a class="btn btn-primary" href="generarcertificados.php?eliminar=true&idcertificado=' . $idcertificado . '">Eliminar Certificado</a>';
+//                           echo '<a class="btn btn-primary" href="enviarcertificados.php?idcertificado=' . $idcertificado . '">Enviar Certificado</a>';
+//                        }
                     ?>
                     <a class="btn btn-danger btn-lg" href="editar.php?eliminar=eliminar&idusuario=<?php echo $idusuario;?>">Eliminar</a>
                 </div>

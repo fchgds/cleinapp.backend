@@ -110,8 +110,8 @@ include('_head.php');
                           <?php
                           $options = ["Facebook/Instagram ALEIIAF",
                                       "Facebook/Instagram CLEIN",
-                                      "Delegado ALEIIAF de mi país",
-                                      "Mi Universidad",
+                                      "Coordinador de mi zona",
+                                      "Centro de Alumnos de la Universidad",
                                       "Otro"];
                           selectoptions($options,$usuario['enteraste']);
                           ?>
@@ -123,23 +123,23 @@ include('_head.php');
                   </div>
 
                   <div class="form-group">
-                      <label for="enteraste">¿Participarás de manera Presencial o Virtual? </label>
-                      <select class="form-control form-select form-select-lg mb-3" id="enteraste" name="enteraste" aria-label="enteraste" required>
+                      <label for="modalidad">¿Participarás de manera Online o Presencial? </label>
+                      <select class="form-control form-select form-select-lg mb-3" id="modalidad" name="modalidad" aria-label="modalidad" required>
                           <?php
                           $options = ["Presencial",
-                              "Virtual"];
-                          selectoptions($options,$usuario['presencial']);
+                              "Online"];
+                          selectoptions($options,$usuario['modalidad']);
                           ?>
                       </select>
                   </div>
 
                   <div class="form-group">
                       <label for="enteraste">¿Estudiante o Profesional? </label>
-                      <select class="form-control form-select form-select-lg mb-3" id="enteraste" name="enteraste" aria-label="enteraste" required>
+                      <select class="form-control form-select form-select-lg mb-3" id="profesional" name="profesional" aria-label="profesional" required>
                           <?php
                           $options = ["Estudiante",
                               "Profesional"];
-                          selectoptions($options,$usuario['presencial']);
+                          selectoptions($options,$usuario['profesional']);
                           ?>
                       </select>
 
@@ -147,9 +147,19 @@ include('_head.php');
                           <label for="enterasteotro">Si elegiste estudiante, necesitarás registrar tu documento de estudiante: </label>
                           <input class="form-control" type="file" id="enterasteotro" name="enterasteotro" value="" />
                       </div>
+
+                  <div class="form-group">
+                      <label for="rol">En calidad de </label>
+                      <select class="form-control form-select form-select-lg mb-3" id="rol" name="rol" aria-label="rol" required>
+                          <?php
+                          $options = ["Participante",
+                              "Expositor",
+                              "Comité Organizador",
+                              "ALEIIAF"];
+                          selectoptions($options,"Participante");
+                          ?>
+                      </select>
                   </div>
-
-
 
                   <br>
                   <div id="alertGuardado" class="alert alert-success collapse" role="alert" >
